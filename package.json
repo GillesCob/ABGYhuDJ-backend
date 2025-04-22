@@ -1,0 +1,27 @@
+{
+  "name": "abgyhudj",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "sass custom.scss:styles.css --load-path=./node_modules",
+    "watch-css": "sass --watch custom.scss:styles.css --load-path=./node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GillesCob/Vue.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GillesCob/Vue.js/issues"
+  },
+  "homepage": "https://github.com/GillesCob/Vue.js#readme",
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.87.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.5"
+  }
+}
