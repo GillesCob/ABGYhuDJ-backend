@@ -11871,7 +11871,7 @@ main {
 }
 
 section {
-  scroll-margin-top: 70px; /* hauteur de la navbar afin que le scroll arrive pile au titre de la section */
+  scroll-margin-top: 100px;
   margin-bottom: 150px;
   margin-top: 100px;
 }
@@ -11935,9 +11935,16 @@ footer a:hover {
   border: 2px solid black;
 }
 
+.concert-section {
+  width: 50%;
+  margin: auto;
+}
+
 .carousel-inner {
-  min-height: 800px;
-  width: 90%;
+  display: flex;
+  align-items: center;
+  min-height: 700px;
+  width: 100%;
   margin: auto;
 }
 
@@ -11952,7 +11959,7 @@ footer a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(208, 14, 14, 0.4470588235);
+  background-color: rgba(203, 42, 42, 0.4470588235);
   display: flex;
   flex-direction: column;
   justify-content: center;
