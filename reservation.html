@@ -6,13 +6,13 @@
     <title>Réservations des billets</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="images/logo.jpg" type="image/jpg">
+    <link rel="icon" href="images/logo_mini.png" type="image/jpg">
 
     <meta name="description" content="Page officielle du groupe ABGYhuDJ. Découvrez notre univers musical, nos prochaines dates de concert et contactez-nous pour toute demande.">
     <meta name="keywords" content="ABGYhuDJ, musique, concerts, rock, contact">
     <meta name="author" content="ABGYhuDJ Team">
     <meta property="og:title" content="Rock Apocalypse World Tour">
-    <meta property="og:image" content="images/logo.jpg">
+    <meta property="og:image" content="images/logo_mini.png">
     <meta property="og:description" content="Rejoignez-nous pour le 'Rock Apocalypse World Tour' et laissez-vous emporter par l'énergie brute et les riffs explosifs de notre groupe.">
     <meta property="og:url" content="https://www.abgyhudj.com">
     <meta property="og:type" content="website">
@@ -20,107 +20,160 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Rock Apocalypse World Tour">
     <meta name="twitter:description" content="Rejoignez-nous pour le 'Rock Apocalypse World Tour' et laissez-vous emporter par l'énergie brute et les riffs explosifs de notre groupe.">
-    <meta name="twitter:image" content="images/logo.jpg">
+    <meta name="twitter:image" content="images/logo_mini.png">
     <meta name="twitter:site" content="@ABGYhuDJ">
     <meta name="twitter:creator" content="@ABGYhuDJ">
+    <style>
+      .card-hover:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+      }
+
+      .card-click {
+        cursor: pointer;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        position: relative;
+      }
+
+    .card-click.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-click .card-body {
+      backface-visibility: hidden;
+    }
+
+    .card-click .card-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden;
+      transform: rotateY(180deg);
+    }
+
+  </style>
 </head>
-
-
 
 
 <!-- Bouton Retour en haut -->
 <button id="backToTop" class="btn btn-primary">
-    ↑
+  ↑
 </button>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg fixed-top bg-primary">
-            <div class="container-fluid">
-                <a href="index.html"><img src="images/logo.jpg" alt="Logo de ABGYhuDJ" class="navbar-brand logo" height="50" width="50"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                        <a class="nav-link" href="dates-tournee.html">Rock Apocalypse World Tour</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="index.html#contact">Nous contacter</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <section class="reservation-section cadre">
-            <div class="container">
-                <h1 class="reservation-title">Réserve ton Ticket !</h1>
-                <div class="row justify-content-center ">
-                    <div class="col-md-8 col-lg-6 form-container">
-                        <form id="contactForm">
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary">
+        <div class="container-fluid">
+            <a href="index.html"><img src="images/logo_mini.png" alt="Logo de ABGYhuDJ" class="navbar-brand logo" height="50" width="50"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                    <a class="nav-link" href="dates-tournee.html">Rock Apocalypse World Tour</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="index.html#contact">Nous contacter</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="reservation-section cadre">
+        <div class="container">
+            <h1 class="reservation-title">Réserve ton Ticket !</h1>
+            <div class="row justify-content-center ">
+                <div class="col-md-8 col-lg-6 form-container">
+                    
+                    <form id="reservationForm" class="card card-click">
+                        <div class="card-body">
+                            <h5 class="card-title">Réserve ton Ticket</h5>
+                            <p class="card-text">Remplis le formulaire ci-dessous pour réserver tes places.</p>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nom complet</label>
                                 <input type="text" class="form-control" id="name" placeholder="Ton nom" required>
                             </div>
-                    
                             <div class="mb-3">
                                 <label for="email" class="form-label">Adresse Email</label>
                                 <input type="email" class="form-control" id="email" placeholder="Ton email" required>
-                                <div id="error-message" style="color: red; display: none;">Veuillez saisir une adresse email valide.</div>
-
+                                <div id="error-message-mail" style="color: red; display: none;">Veuillez saisir une adresse email valide.</div>
                             </div>
-                    
                             <div class="mb-3">
                                 <label for="city" class="form-label">Ville du concert</label>
                                 <select class="form-select" id="city">
-                                <option selected>Choisis ta scène 🔥</option>
-                                <option value="Paris">Paris - Accor Arena</option>
-                                <option value="Lyon">Lyon - Halle Tony Garnier</option>
-                                <option value="Marseille">Marseille - Le Dôme</option>
-                                <option value="Toulouse">Toulouse - Zénith</option>
-                                <option value="Bruxelles">Bruxelles - Forest National</option>
-                                <option value="Berlin">Berlin - Mercedes-Benz Arena</option>
-                                <option value="Amsterdam">Amsterdam - Ziggo Dome</option>
-                                <option value="Londres">Londres - O2 Arena</option>
-                                <option value="Madrid">Madrid - WiZink Center</option>
-                                <option value="Rome">Rome - Palazzo dello Sport</option>
+                                    <option selected>Choisis ta scène 🔥</option>
+                                    <option value="Paris">Paris - Accor Arena</option>
+                                    <option value="Lyon">Lyon - Halle Tony Garnier</option>
+                                    <option value="Marseille">Marseille - Le Dôme</option>
+                                    <option value="Toulouse">Toulouse - Zénith</option>
+                                    <option value="Bruxelles">Bruxelles - Forest National</option>
+                                    <option value="Berlin">Berlin - Mercedes-Benz Arena</option>
+                                    <option value="Amsterdam">Amsterdam - Ziggo Dome</option>
+                                    <option value="Londres">Londres - O2 Arena</option>
+                                    <option value="Madrid">Madrid - WiZink Center</option>
+                                    <option value="Rome">Rome - Palazzo dello Sport</option>
                                 </select>
                             </div>
-                    
                             <div class="mb-3">
                                 <label for="tickets" class="form-label">Nombre de tickets</label>
                                 <input type="number" class="form-control" id="tickets" min="1" max="10" placeholder="1 - 10" required>
                             </div>
-                    
+                            <button type="button" class="btn btn-primary w-100 card-click" id="NextButton">Passer au paiement</button>
+                        </div>
+
+                        <div class="card card-back">
+                            <h5 class="card-title">Détails de paiement</h5>
+                            <p class="card-text">Remplis les informations de paiement ci-dessous.</p>
                             <div class="mb-3">
-                                <label for="message" class="form-label">Message spécial</label>
-                                <textarea class="form-control" id="message" rows="3" placeholder="Un mot pour le groupe ? (optionnel)"></textarea>
+                                <label for="cardNumber" class="form-label">Numéro de carte</label>
+                                <input type="text" class="form-control" id="cardNumber" placeholder="Numéro de carte" required>
                             </div>
-                    
-                            <button type="submit" class="btn btn-primary w-100">Réserver maintenant</button>
-                
-                        </form>
-                    </div>
+                            <div class="mb-3">
+                                <label for="expiryDate" class="form-label">Date d'expiration</label>
+                                <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cvv" class="form-label">CVV</label>
+                                <input type="text" class="form-control" id="cvv" placeholder="CVV" required>
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-primary card-click" id="PreviousButton">Retour</button>
+                            </div>
+                            <button id="Pay" type="submit" class="btn btn-secondary">Payer maintenant</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 ABGYhuDJ. Tous droits réservés.</p>
-            <nav>
-                <a href="#">Politique de confidentialité</a>
-                <a href="#">Conditions d'utilisation</a>
-            </nav>
         </div>
-    </footer>
+    </section>
+</main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+<footer>
+    <div class="container">
+        <p>&copy; 2025 ABGYhuDJ. Tous droits réservés.</p>
+        <nav>
+            <a href="#">Politique de confidentialité</a>
+            <a href="#">Conditions d'utilisation</a>
+        </nav>
+    </div>
+</footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+
+  
 </body>
+</html>
