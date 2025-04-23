@@ -18,7 +18,6 @@ $font-family-base: 'Open Sans', sans-serif; // Police secondaire => Texte de par
 body {
   background-color: $light;
   color: $dark;
-  margin-top: 70px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -31,15 +30,44 @@ p {
 
 main {
     min-height: 90vh;
+    margin-top: 0px;
 }
 
 section {
     scroll-margin-top: 100px;
-    margin-bottom: 150px;
-    margin-top: 100px;
+    margin-top: 60px;
   }
 
-  
+  // -------------------------------- Sections --------------------------------
+
+.welcome-section{
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.contact-section{
+  margin-top: 150px;
+  margin-bottom: 300px;
+}
+
+.rawt-section{
+  padding-top: 100px;
+  padding-bottom: 100px;
+  color: $light;
+  background-image: url('images/rock-5.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.reservation-section{
+  min-height: 100vh;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  color: $light;
+  background-image: url('images/rock-4.jpg');
+  background-size: cover;
+  background-position: center;
+}
 
 // -------------------------------- Composants --------------------------------
 // Boutons
@@ -114,38 +142,35 @@ footer {
     border: 2px solid black;
 }
 
-.concert-section{
-  width: 50%;
-  margin: auto;
+.icon-position {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: $primary
 }
 
-.carousel-inner{
-  display: flex;
-  align-items: center;
-  min-height: 700px;
-  width: 100%;
-  margin: auto;
+ul {
+  list-style-type: none;
+  padding-left: 0;  /* Supprimer l'espace à gauche pour les listes non ordonnées */
 }
 
-.image-container{
-  position: relative;
-  display: inline-block;
+
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: $primary;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 15px;
+  font-size: 18px;
+  cursor: pointer;
+  display: none; /* Modification via le javascript */
+  transition: all 0.3s ease;
 }
 
-.image-container .overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #cb2a2a72;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-    pointer-events: none;
+#backToTop:hover {
+  background-color: lighten($primary, 20%); /* même survol que le bouton primaire */
 }
-
