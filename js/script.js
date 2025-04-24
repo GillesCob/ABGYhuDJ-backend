@@ -134,7 +134,7 @@ function lancerAnimationConfirmation() {
                     <div style="font-size: 60px;">🎉
                         <h2 class="mt-3">Merci pour ta réservation !</h2>
                         <p>On se voit au concert 🤘</p>
-                        <a href="index.html" class="btn btn-secondary mt-4">Retour à l'accueil</a>
+                        <a href="../index.html" class="btn btn-secondary mt-4">Retour à l'accueil</a>
                     </div> 
                 </div>
             `;

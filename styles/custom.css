@@ -11857,7 +11857,11 @@ body {
   color: #000000;
 }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+body.bg-black {
+  background-color: black;
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", sans-serif;
 }
 
@@ -11875,21 +11879,27 @@ section {
   margin-top: 60px;
 }
 
+.home-page-section {
+  background-image: url("../images/rock-6.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
 .welcome-section {
-  margin-top: 100px;
-  margin-bottom: 50px;
+  padding-top: 100px;
+  padding-bottom: 50px;
 }
 
 .contact-section {
-  margin-top: 150px;
-  margin-bottom: 300px;
+  padding-top: 150px;
+  padding-bottom: 300px;
 }
 
 .rawt-section {
   padding-top: 100px;
   padding-bottom: 100px;
   color: #F2F2F2;
-  background-image: url("images/rock-5.jpg");
+  background-image: url("../images/rock-5.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -11899,7 +11909,7 @@ section {
   padding-top: 100px;
   padding-bottom: 100px;
   color: #F2F2F2;
-  background-image: url("images/rock-4.jpg");
+  background-image: url("../images/rock-4.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -11960,7 +11970,7 @@ footer a:hover {
 }
 
 .cadre {
-  border: 2px solid black;
+  border: 6px solid rgb(238, 0, 0);
 }
 
 .icon-position {
@@ -12030,4 +12040,4 @@ ul {
   transform: rotateY(180deg);
 }
 
-/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=custom.css.map */

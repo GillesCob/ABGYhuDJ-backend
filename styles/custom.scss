@@ -1,24 +1,37 @@
 // custom.scss
 
+// 1. Variables d'abord
+$primary: #FF0000;
+$secondary: #FFFFFF;
+$light: #F2F2F2;
+$dark: #000000;
+$medium-gray: #CCCCCC;
+
+$headings-font-family: 'Roboto', sans-serif;
+$font-family-base: 'Open Sans', sans-serif;
+
+//Utilisation de @use plus récente que @import. Obligé du coup de définir les variables avant
+@use "bootstrap/scss/bootstrap" with (
+  $primary: $primary,
+  $secondary: $secondary,
+  $light: $light,
+  $dark: $dark,
+  $font-family-base: $font-family-base,
+  $headings-font-family: $headings-font-family
+);
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
-
-$primary: #FF0000; // Couleur principale : Rouge => Backgrounds, boutons principaux, liens importants
-$secondary: #FFFFFF; // Couleurs secondaires : Blanc => exte principal, fonds de sections
-$light: #F2F2F2; // Gris clair => Backgrounds alternatifs, bordures
-$dark: #000000; // Noir => Texte principal, titres
-$medium-gray: #CCCCCC; // Gris moyen pour les placeholders
-
-
-$headings-font-family: 'Roboto', sans-serif; // Police principale => Titres, sous-titres
-$font-family-base: 'Open Sans', sans-serif; // Police secondaire => Texte de paragraphe, descriptions
-
-@import "node_modules/bootstrap/scss/bootstrap";
-
 
 body {
   background-color: $light;
   color: $dark;
 }
+
+
+body.bg-black {
+  background-color: black;
+}
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $headings-font-family;
@@ -40,21 +53,27 @@ section {
 
   // -------------------------------- Sections --------------------------------
 
+.home-page-section{
+  background-image: url('../images/rock-6.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
 .welcome-section{
-  margin-top: 100px;
-  margin-bottom: 50px;
+  padding-top: 100px;
+  padding-bottom: 50px;
 }
 
 .contact-section{
-  margin-top: 150px;
-  margin-bottom: 300px;
+  padding-top: 150px;
+  padding-bottom: 300px;
 }
 
 .rawt-section{
   padding-top: 100px;
   padding-bottom: 100px;
   color: $light;
-  background-image: url('images/rock-5.jpg');
+  background-image: url('../images/rock-5.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -64,7 +83,7 @@ section {
   padding-top: 100px;
   padding-bottom: 100px;
   color: $light;
-  background-image: url('images/rock-4.jpg');
+  background-image: url('../images/rock-4.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -139,7 +158,7 @@ footer {
 }
 
 .cadre{
-    border: 2px solid black;
+    border: 6px solid rgb(238, 0, 0);
 }
 
 .icon-position {
