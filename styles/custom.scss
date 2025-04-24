@@ -1,6 +1,3 @@
-// custom.scss
-
-// 1. Variables d'abord
 $primary: #FF0000;
 $secondary: #FFFFFF;
 $light: #F2F2F2;
@@ -171,7 +168,7 @@ footer {
 
 ul {
   list-style-type: none;
-  padding-left: 0;  /* Supprimer l'espace à gauche pour les listes non ordonnées */
+  padding-left: 0;
 }
 
 
@@ -186,12 +183,12 @@ ul {
   padding: 10px 15px;
   font-size: 18px;
   cursor: pointer;
-  display: none; /* Modification via le javascript */
+  display: none;
   transition: all 0.3s ease;
 }
 
 #backToTop:hover {
-  background-color: lighten($primary, 20%); /* même survol que le bouton primaire */
+  background-color: lighten($primary, 20%);
 }
 
 
