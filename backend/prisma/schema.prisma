@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Utilisateur {
+  id                Int       @id @default(autoincrement())
+  nom               String    @db.VarChar(100)
+  email             String    @unique @db.VarChar(150)
+  mot_de_passe      String    @db.VarChar(255)
+  role              Role      @default(utilisateur)
+  date_inscription  DateTime  @default(now())
+  commandes         Commande[]
+}
+
+model Concert {
+  id             Int       @id @default(autoincrement())
+  nom            String    @db.VarChar(150)
+  lieu           String    @db.VarChar(150)
+  date           DateTime
+  nombre_tickets Int
+  prix           Decimal   @db.Decimal(8, 2)
+  tickets        Ticket[]
+}
+
+model Commande {
+  id             Int       @id @default(autoincrement())
+  utilisateur_id Int
+  utilisateur    Utilisateur @relation(fields: [utilisateur_id], references: [id], onDelete: Cascade)
+  date_commande  DateTime  @default(now())
+  total          Decimal   @db.Decimal(10, 2)
+  statut         StatutCommande @default(payee)
+  tickets        Ticket[]
+  paiements      Paiement[]
+}
+
+model Ticket {
+  id          Int       @id @default(autoincrement())
+  commande_id Int
+  commande    Commande  @relation(fields: [commande_id], references: [id], onDelete: Cascade)
+  concert_id  Int
+  concert     Concert   @relation(fields: [concert_id], references: [id], onDelete: Cascade)
+  code_unique String    @unique @db.VarChar(100)
+  statut      StatutTicket @default(valide)
+}
+
+model Paiement {
+  id            Int       @id @default(autoincrement())
+  commande_id   Int
+  commande      Commande  @relation(fields: [commande_id], references: [id], onDelete: Cascade)
+  mode          String    @db.VarChar(50)
+  montant       Decimal   @db.Decimal(10, 2)
+  date_paiement DateTime @default(now())
+  statut        StatutPaiement @default(succes)
+}
+
+enum Role {
+  admin
+  utilisateur
+}
+
+enum StatutCommande {
+  payee
+  annulee
+}
+
+enum StatutTicket {
+  valide
+  utilise
+}
+
+enum StatutPaiement {
+  succes
+  echec
+}
