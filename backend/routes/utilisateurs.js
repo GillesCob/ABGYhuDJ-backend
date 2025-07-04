@@ -20,10 +20,10 @@ router.post('/', async (req, res) => {
     // Utilisation de Prisma pour insérer un nouvel utilisateur en BDD
     const nouvelUtilisateur = await prisma.utilisateur.create({
       data: {
-        nom,                         // Nom de l'utilisateur
-        email,                       // Email (doit être unique)
-        mot_de_passe,                // Mot de passe (à hasher idéalement avant)
-        role: role || 'utilisateur', // Rôle par défaut "utilisateur" si non spécifié
+        nom,                         
+        email,                       
+        mot_de_passe,                
+        role: role || 'utilisateur',
       },
     });
 
