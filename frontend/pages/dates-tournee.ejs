@@ -3,117 +3,28 @@
       <h1 class="tour-title mb-4">Rock Apocalypse World Tour 2025</h1>
   
       <div class="row g-4">
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Paris</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 15 octobre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> Accor Arena</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
+        <% concerts.forEach(concert => { %>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 text-center p-3">
+              <h5 class="card-title"><%= concert.ville %></h5>
+              <ul>
+                <li><i class="fa-solid fa-calendar-days"></i> <%= concert.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %></li>
+                <li><i class="fa-solid fa-location-dot"></i> <%= concert.salle %></li>
+                <li>
+                  <% if (session && session.userId) { %>
+                    <a href="/reservation?concert=<%= concert.id %>" class="btn btn-secondary mt-2">Réserver</a>
+                  <% } else { %>
+                    <span class="text-danger">Vous devez vous connecter pour réserver</span>
+                  <% } %>
+                </li>
+                <% if (typeof session !== 'undefined' && session.role === 'admin') { %>
+                  <a class="btn btn-secondary mt-2" href="/modifier-concert/<%= concert.id %>">Modifier concert</a>
+                <% } %>
+              </ul>
+            </div>
           </div>
-        </div>
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Lyon</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 20 octobre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> Halle Tony Garnier</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Marseille</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 25 octobre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> Le Dôme</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Toulouse</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 30 octobre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> Zénith Toulouse</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Bruxelles</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 5 novembre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> Forest National</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Berlin</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 10 novembre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> Mercedes-Benz Arena</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Amsterdam</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 15 novembre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> Ziggo Dome</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Londres</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 20 novembre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> O2 Arena</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Madrid</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 25 novembre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> WiZink Center</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 text-center p-3">
-            <h5 class="card-title">Rome</h5>
-            <ul>
-              <li><i class="fa-solid fa-calendar-days"></i> 30 novembre 2025</li>
-              <li><i class="fa-solid fa-location-dot"></i> Palazzo dello Sport</li>
-              <li><a href="reservation" class="btn btn-secondary mt-2">Réserver</a></li>
-            </ul>
-          </div>
-        </div>
-        
+        <% }) %>
       </div>
+      
     </div>
   </section>

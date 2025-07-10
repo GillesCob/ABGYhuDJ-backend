@@ -4,17 +4,25 @@ import express from 'express';
 // Importation du client Prisma pour interagir avec la base de données
 import { PrismaClient } from '../generated/prisma/index.js';
 
+// Importation de bcrypt pour le hachage des mots de passe
+import bcrypt from 'bcrypt';
+
+
 // Création d'un routeur Express dédié à la gestion des utilisateurs
 const router = express.Router();
 
 // Instanciation du client Prisma, qui permet d'exécuter des requêtes sur la BDD
 const prisma = new PrismaClient();
 
+
+
 /* ----------------------- CREATE ----------------------- */
 // Route HTTP POST pour créer un nouvel utilisateur
 router.post('/', async (req, res) => {
   // Récupération des données utilisateur depuis le corps de la requête
-  const { nom, email, mot_de_passe, role } = req.body;
+  const { nom, email, mot_de_passe } = req.body;
+
+  const mot_de_passe_hash = await bcrypt.hash(mot_de_passe, 10);
 
   try {
     // Utilisation de Prisma pour insérer un nouvel utilisateur en BDD
@@ -22,8 +30,7 @@ router.post('/', async (req, res) => {
       data: {
         nom,                         
         email,                       
-        mot_de_passe,                
-        role: role || 'utilisateur',
+        mot_de_passe : mot_de_passe_hash, // Mot de passe haché pour la sécurité
       },
     });
 

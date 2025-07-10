@@ -27,13 +27,14 @@ model Utilisateur {
 
 model Concert {
   id             Int       @id @default(autoincrement())
-  nom            String    @db.VarChar(150)
-  lieu           String    @db.VarChar(150)
+  ville          String    @db.VarChar(100)
+  salle          String    @db.VarChar(150)
   date           DateTime
   nombre_tickets Int
   prix           Decimal   @db.Decimal(8, 2)
   tickets        Ticket[]
 }
+
 
 model Commande {
   id             Int       @id @default(autoincrement())

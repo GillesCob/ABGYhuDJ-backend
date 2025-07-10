@@ -1,66 +1,73 @@
 <section class="reservation-section">
-    <div class="container">
-        <h1 class="reservation-title">Réserve ton Ticket !</h1>
-        <div class="row justify-content-center ">
-            <div class="col-md-8 col-lg-6 form-container">
-                
-                <form id="reservationForm" class="card card-click">
-                    <div class="card-body">
-                        <p class="card-text">Remplis le formulaire ci-dessous pour réserver tes places.</p>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nom complet</label>
-                            <input type="text" class="form-control" id="name" placeholder="Ton nom" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Adresse Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Ton email" required>
-                            <div id="error-message-mail" style="color: red; display: none;">Veuillez saisir une adresse email valide.</div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="city" class="form-label">Ville du concert</label>
-                            <select class="form-select" id="city">
-                                <option selected>Choisis ta scène 🔥</option>
-                                <option value="Paris">Paris - Accor Arena - 15/10/25</option>
-                                <option value="Lyon">Lyon - Halle Tony Garnier - 20/10/25</option>
-                                <option value="Marseille">Marseille - Le Dôme - 25/10/25</option>
-                                <option value="Toulouse">Toulouse - Zénith - 30/10/25</option>
-                                <option value="Bruxelles">Bruxelles - Forest National - 05/11/25</option>
-                                <option value="Berlin">Berlin - Mercedes-Benz Arena - 10/11/25</option>
-                                <option value="Amsterdam">Amsterdam - Ziggo Dome - 15/11/25</option>
-                                <option value="Londres">Londres - O2 Arena - 20/11/25</option>
-                                <option value="Madrid">Madrid - WiZink Center - 25/11/25</option>
-                                <option value="Rome">Rome - Palazzo dello Sport - 30/11/25</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tickets" class="form-label">Nombre de tickets</label>
-                            <input type="number" class="form-control" id="tickets" min="1" max="10" placeholder="1 - 10" required>
-                        </div>
-                        <button type="button" class="btn btn-primary w-100 card-click" id="NextButton">Passer au paiement</button>
-                    </div>
-
-                    <div class="card card-back">
-                        <h5 class="card-title">Détails de paiement</h5>
-                        <p class="card-text">Remplis les informations de paiement ci-dessous.</p>
-                        <div class="mb-3">
-                            <label for="cardNumber" class="form-label">Numéro de carte</label>
-                            <input type="text" class="form-control" id="cardNumber" placeholder="Numéro de carte" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="expiryDate" class="form-label">Date d'expiration</label>
-                            <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cvv" class="form-label">CVV</label>
-                            <input type="text" class="form-control" id="cvv" placeholder="CVV" required>
-                        </div>
-                        <div class="mb-3">
-                            <button type="button" class="btn btn-primary card-click" id="PreviousButton">Retour</button>
-                        </div>
-                        <button id="Pay" type="submit" class="btn btn-secondary">Payer maintenant</button>
-                    </div>
-                </form>
+  <div class="container">
+    <h1 class="reservation-title">Réserve ton Ticket !</h1>
+    <div class="row justify-content-center ">
+      <div class="col-md-8 col-lg-6 form-container">
+        
+        <form id="reservationForm" class="card card-click">
+          <div class="card-body">
+            <p class="card-text">Remplis le formulaire ci-dessous pour réserver tes places.</p>
+            
+            <div class="mb-3">
+              <label for="name" class="form-label">Nom complet</label>
+              <input type="text" class="form-control" id="name" required value="<%= session.nom || '' %>">
             </div>
-        </div>
+            
+            <div class="mb-3">
+              <label for="email" class="form-label">Adresse Email</label>
+              <input type="email" class="form-control" id="email" required value="<%= session.email || '' %>">
+              <div id="error-message-mail" style="color: red; display: none;">Veuillez saisir une adresse email valide.</div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="city" class="form-label">Concert</label>
+              <select class="form-select" id="city" name="city" required>
+                <% if (concert) { %>
+                  <option value="<%= concert.ville %>" selected>
+                    <%= concert.ville %> - <%= concert.salle %> - 
+                    <%= new Date(concert.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+                  </option>
+                <% } else { %>
+                  <option selected disabled>Pas de concerts disponibles</option>
+                <% } %>
+              </select>
+            </div>
+            
+            <div class="mb-3">
+              <label for="tickets" class="form-label">Nombre de tickets</label>
+              <input type="number" class="form-control" id="tickets" min="1" max="10" placeholder="1 - 10" required>
+            </div>
+            
+            <button type="button" class="btn btn-primary w-100 card-click" id="NextButton">Passer au paiement</button>
+          </div>
+
+          <div class="card card-back">
+            <h5 class="card-title">Détails de paiement</h5>
+            <p class="card-text">Remplis les informations de paiement ci-dessous.</p>
+            
+            <div class="mb-3">
+              <label for="cardNumber" class="form-label">Numéro de carte</label>
+              <input type="text" class="form-control" id="cardNumber" placeholder="Numéro de carte" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="expiryDate" class="form-label">Date d'expiration</label>
+              <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="cvv" class="form-label">CVV</label>
+              <input type="text" class="form-control" id="cvv" placeholder="CVV" required>
+            </div>
+            
+            <div class="mb-3">
+              <button type="button" class="btn btn-primary card-click" id="PreviousButton">Retour</button>
+            </div>
+            
+            <button id="Pay" type="submit" class="btn btn-secondary">Payer maintenant</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </section>

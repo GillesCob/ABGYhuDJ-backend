@@ -1,0 +1,30 @@
+<h1 class="mt-5 p-5">Mes réservations</h1>
+<% commandes.forEach(commande => { %>
+  <% const concert = commande.tickets[0]?.concert; %>
+  <div class="concert-card card mb-4">
+    <div class="card-body mt-5">
+      <% if (concert) { %>
+        <h2 class="card-title"><%= concert.ville %> - <%= concert.salle %></h2>
+        <p class="card-text">
+          Date : <%= new Date(concert.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %><br>
+          Prix unitaire : <%= concert.prix.toFixed(2) %> €
+        </p>
+      <% } else { %>
+        <p>Concert non disponible.</p>
+      <% } %>
+
+      <h3>Billets réservés :</h3>
+      <% if (commande.tickets.length === 0) { %>
+        <p>Aucun billet associé.</p>
+      <% } else { %>
+        <ul>
+          <% commande.tickets.forEach(ticket => { %>
+            <li>
+              Code billet : <%= ticket.code_unique %> - Statut : <%= ticket.statut %>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </div>
+<% }) %>

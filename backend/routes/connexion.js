@@ -1,5 +1,9 @@
 import express from 'express';
 import { PrismaClient } from '../generated/prisma/index.js';
+import { logActivity } from '../utils/logActivity.js';
+import bcrypt from 'bcrypt';
+
+
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -16,10 +20,17 @@ router.post('/', async (req, res) => {
     });
 
     // Vérifiez si l'utilisateur existe et si le mot de passe est correct
-    if (utilisateur && utilisateur.mot_de_passe === mot_de_passe) {
-      // Stockez l'ID de l'utilisateur dans la session
+    const match = await bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe);
+    if (utilisateur && match) {
+      // Stockez des données de l'utilisateur dans la session
       req.session.userId = utilisateur.id;
+      req.session.role = utilisateur.role;
+      req.session.nom = utilisateur.nom;
+      req.session.email = utilisateur.email;
+      console.log(req.session)
+      await logActivity(req.session.userId, 'Connexion');
       res.status(200).json({ message: 'Connexion réussie', utilisateur });
+
     } else {
       res.status(401).json({ erreur: 'Email ou mot de passe incorrect' });
     }
@@ -28,18 +39,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-/* ----------------------- Deconnexion ----------------------- */
-
-router.get('/deconnexion', (req, res) => {
-  req.session.destroy(err => {
-    if (err) {
-      console.error('Erreur lors de la destruction de la session :', err);
-      res.status(500).json({ erreur: 'Erreur serveur' });
-    } else {
-      res.status(200).json({ message: 'Déconnexion réussie' });
-    }
-  });
-});
-
-// Export du routeur pour pouvoir l'utiliser dans le serveur principal (app.js)
 export default router;

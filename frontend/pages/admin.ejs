@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <h2 class="p-4">Ajouter un concert</h2>
+  
+  <form id="Ajout_concert">
+
+    <div class="mb-3">
+      <label for="ville" class="form-label">Ville</label>
+      <input type="text" class="form-control" id="ville" name="ville" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="salle" class="form-label">Salle</label>
+      <input type="text" class="form-control" id="salle" name="salle" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input type="datetime-local" class="form-control" id="date" name="date" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="nombre_tickets" class="form-label">Nombre de tickets</label>
+      <input type="number" class="form-control" id="nombre_tickets" name="nombre_tickets" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="prix" class="form-label">Prix (€)</label>
+      <input type="number" class="form-control" id="prix" name="prix" step="0.01" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+  </form>
+</div>
