@@ -2,6 +2,7 @@ import express from 'express';
 import { PrismaClient } from '../generated/prisma/index.js';
 import { v4 as uuidv4 } from 'uuid';
 import { logActivity } from '../utils/logActivity.js';
+import { isAuthenticated } from '../middleware/isAuthenticated.js';
 
 
 
@@ -9,7 +10,7 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 // Récupérer les concerts disponibles pour la réservation
-router.get('/', async (req, res) => {
+router.get('/', isAuthenticated, async (req, res) => {
   const concertId = parseInt(req.query.concert);
 
   try {
@@ -27,7 +28,7 @@ router.get('/', async (req, res) => {
 
 
 // Réserver des billets pour un concert
-router.post('/', async (req, res) => {
+router.post('/', isAuthenticated, async (req, res) => {
   const {
     name,
     email,

@@ -7,6 +7,12 @@ import { PrismaClient } from '../generated/prisma/index.js';
 // Importation de bcrypt pour le hachage des mots de passe
 import bcrypt from 'bcrypt';
 
+// validation des entrées utilisateur
+import { body, validationResult } from 'express-validator';
+
+// Importation des middlewares pour vérifier les rôles et l'authentification
+import { isAdmin } from '../middleware/isAdmin.js';
+import { isAuthenticated } from '../middleware/isAuthenticated.js';
 
 // Création d'un routeur Express dédié à la gestion des utilisateurs
 const router = express.Router();
@@ -17,9 +23,18 @@ const prisma = new PrismaClient();
 
 
 /* ----------------------- CREATE ----------------------- */
-// Route HTTP POST pour créer un nouvel utilisateur
-router.post('/', async (req, res) => {
-  // Récupération des données utilisateur depuis le corps de la requête
+// Route HTTP POST pour créer un nouvel utilisateur. Utilisation de la sanitation pour cette route. A ajouter aux autres
+router.post('/', 
+    [
+    body('nom').trim().notEmpty().withMessage('Le nom est requis'),
+    body('email').isEmail().withMessage('Email invalide').normalizeEmail(),
+    body('mot_de_passe').isLength({ min: 6 }).withMessage('Le mot de passe doit contenir au moins 6 caractères'),
+  ],
+  async (req, res) => {
+        const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ erreurs: errors.array() });
+    }
   const { nom, email, mot_de_passe } = req.body;
 
   const mot_de_passe_hash = await bcrypt.hash(mot_de_passe, 10);
@@ -45,7 +60,7 @@ router.post('/', async (req, res) => {
 
 /* ----------------------- READ (tous) ----------------------- */
 // Route HTTP GET pour récupérer tous les utilisateurs
-router.get('/', async (req, res) => {
+router.get('/', isAuthenticated, isAdmin, async (req, res) => {
   try {
     // Récupération de tous les utilisateurs en base via Prisma
     const utilisateurs = await prisma.utilisateur.findMany();
@@ -61,7 +76,7 @@ router.get('/', async (req, res) => {
 
 /* ----------------------- READ (un seul) ----------------------- */
 // Route HTTP GET pour récupérer un utilisateur spécifique par son ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', isAuthenticated, async (req, res) => {
   // Extraction et conversion de l'ID depuis l'URL en entier
   const id = parseInt(req.params.id);
 
@@ -87,7 +102,7 @@ router.get('/:id', async (req, res) => {
 
 /* ----------------------- UPDATE ----------------------- */
 // Route HTTP PUT pour modifier un utilisateur existant par son ID
-router.put('/:id', async (req, res) => {
+router.put('/:id', isAuthenticated, async (req, res) => {
   // Extraction de l'ID utilisateur et des champs à modifier depuis la requête
   const id = parseInt(req.params.id);
   const { nom, email, mot_de_passe, role } = req.body;
@@ -110,7 +125,7 @@ router.put('/:id', async (req, res) => {
 
 /* ----------------------- DELETE ----------------------- */
 // Route HTTP DELETE pour supprimer un utilisateur par son ID
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isAuthenticated, isAdmin, async (req, res) => {
   // Extraction de l'ID utilisateur à supprimer
   const id = parseInt(req.params.id);
 

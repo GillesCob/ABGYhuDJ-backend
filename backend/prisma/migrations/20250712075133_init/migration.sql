@@ -14,8 +14,8 @@ CREATE TABLE `Utilisateur` (
 -- CreateTable
 CREATE TABLE `Concert` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `nom` VARCHAR(150) NOT NULL,
-    `lieu` VARCHAR(150) NOT NULL,
+    `ville` VARCHAR(100) NOT NULL,
+    `salle` VARCHAR(150) NOT NULL,
     `date` DATETIME(3) NOT NULL,
     `nombre_tickets` INTEGER NOT NULL,
     `prix` DECIMAL(8, 2) NOT NULL,

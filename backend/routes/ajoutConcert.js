@@ -1,12 +1,14 @@
 import express from 'express';
 import { PrismaClient } from '../generated/prisma/index.js';
+import { isAdmin } from '../middleware/isAdmin.js';
+import { isAuthenticated } from '../middleware/isAuthenticated.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
 
 /* ----------------------- CREATE ----------------------- */
 // Route HTTP POST pour créer un nouveau concert
-router.post('/', async (req, res) => {
+router.post('/', isAuthenticated, isAdmin, async (req, res) => {
   // Récupération des données du concert depuis le corps de la requête
   const { ville, salle, date, nombre_tickets, prix } = req.body;
 

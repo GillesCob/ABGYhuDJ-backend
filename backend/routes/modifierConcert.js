@@ -1,11 +1,13 @@
 import express from 'express';
 import { PrismaClient } from '../generated/prisma/index.js';
+import { isAdmin } from '../middleware/isAdmin.js';
+import { isAuthenticated } from '../middleware/isAuthenticated.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
 
 /* ----------------------- GET ----------------------- */
-router.get('/modifier-concert/:id', async (req, res) => {
+router.get('/modifier-concert/:id', isAuthenticated, isAdmin, async (req, res) => {
   const concertId = parseInt(req.params.id);
   try {
     const concert = await prisma.concert.findUnique({
@@ -22,7 +24,7 @@ router.get('/modifier-concert/:id', async (req, res) => {
 });
 
 /* ----------------------- UPDATE ----------------------- */
-router.post('/modifier-concert/:id', async (req, res) => {
+router.post('/modifier-concert/:id', isAuthenticated, isAdmin, async (req, res) => {
   const concertId = parseInt(req.params.id);
   const { ville, date, salle } = req.body;
 
@@ -43,7 +45,7 @@ router.post('/modifier-concert/:id', async (req, res) => {
 });
 
 /* ----------------------- DELETE ----------------------- */
-router.post('/supprimer-concert/:id', async (req, res) => {
+router.post('/supprimer-concert/:id', isAuthenticated, isAdmin, async (req, res) => {
   const concertId = parseInt(req.params.id);
 
   try {
