@@ -19,7 +19,7 @@ router.get('/', isAuthenticated, async (req, res) => {
       concert = await prisma.concert.findUnique({ where: { id: concertId } });
     }
 
-    res.render('Pages/reservation', { concert, nom: req.session.nom || '', email: req.session.email || ''}); //Données envoyées à la vue
+    res.render('pages/reservation', { concert, nom: req.session.nom || '', email: req.session.email || ''}); //Données envoyées à la vue
   } catch (err) {
     console.error(err);
     res.status(500).send('Erreur serveur');
