@@ -94,7 +94,7 @@ router.post('/', isAuthenticated, async (req, res) => {
         statut: 'succes'
       }
     });
-  await logActivity(req.session.userId, 'Achat billets');
+  // await logActivity(req.session.userId, 'Achat billets');
     res.status(200).json({ message: 'Réservation confirmée' });
 
   } catch (error) {

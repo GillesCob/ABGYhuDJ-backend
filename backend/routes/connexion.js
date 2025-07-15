@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
       req.session.nom = utilisateur.nom;
       req.session.email = utilisateur.email;
       console.log(req.session)
-      await logActivity(req.session.userId, 'Connexion');
+      // await logActivity(req.session.userId, 'Connexion');
       res.status(200).json({ message: 'Connexion réussie', utilisateur });
 
     } else {

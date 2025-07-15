@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     // Log de l'activité de déconnexion
-    await logActivity(req.session.userId, 'Déconnexion');
+    // await logActivity(req.session.userId, 'Déconnexion');
   } catch (error) {
     console.error('Erreur lors de l\'enregistrement de l\'activité de déconnexion:', error);
   }
