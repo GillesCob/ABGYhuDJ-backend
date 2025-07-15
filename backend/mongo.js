@@ -4,7 +4,6 @@ const uri = process.env.MONGODB_URL;
 
 const client = new MongoClient(uri, {
   ssl: true,
-  minVersion: 'TLSv1.2', // IMPORTANT pour éviter l'erreur TLS
 });
 
 let db;
