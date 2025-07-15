@@ -10,6 +10,7 @@
               <ul>
                 <li><i class="fa-solid fa-calendar-days"></i> <%= concert.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) %></li>
                 <li><i class="fa-solid fa-location-dot"></i> <%= concert.salle %></li>
+                <li><i class="fa-solid fa-location-dot"></i> <%= concert.prix %>€</li>
                 <li>
                   <% if (session && session.userId) { %>
                     <a href="/reservation?concert=<%= concert.id %>" class="btn btn-secondary mt-2">Réserver</a>

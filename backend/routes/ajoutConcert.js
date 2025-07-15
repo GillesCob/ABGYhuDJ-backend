@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 /* ----------------------- CREATE ----------------------- */
 // Route HTTP POST pour créer un nouveau concert
-router.post('/', isAuthenticated, isAdmin, async (req, res) => {
+router.post('/', /*isAuthenticated, isAdmin,*/ async (req, res) => {
   // Récupération des données du concert depuis le corps de la requête
   const { ville, salle, date, nombre_tickets, prix } = req.body;
 
