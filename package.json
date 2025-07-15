@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "express-ejs-layouts": "^2.5.1"
+  },
+  "scripts": {
+    "start": "node backend/index.js",
+    "postinstall": "prisma generate"
+
   }
 }
