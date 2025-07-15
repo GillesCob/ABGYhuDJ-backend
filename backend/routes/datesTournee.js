@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const concerts = await prisma.concert.findMany({
       orderBy: { date: 'asc' } // Tri par date croissante
     });
-    res.render('Pages/dates-tournee', { concerts });
+    res.render('pages/dates-tournee', { concerts });
   } catch (err) {
     console.error(err);
     res.status(500).send('Erreur serveur');
