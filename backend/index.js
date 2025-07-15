@@ -22,6 +22,9 @@ import { isAdmin } from './middleware/isAdmin.js';
 // Chargement des variables d'environnement depuis le fichier .env
 dotenv.config();
 
+console.log('DATABASE_URL:', process.env.DATABASE_URL);
+
+
 // Initialisation de l'application Express
 const app = express();
 const PORT = process.env.PORT || 3000;
