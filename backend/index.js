@@ -24,7 +24,7 @@ dotenv.config();
 
 // Initialisation de l'application Express
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // --- Configuration des chemins absolus (compatibilité ES Modules) ---
 const __filename = fileURLToPath(import.meta.url);
