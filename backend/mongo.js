@@ -3,21 +3,18 @@ import { MongoClient } from 'mongodb';
 const uri = process.env.MONGODB_URL;
 
 const client = new MongoClient(uri, {
-  ssl: true,
+  tls: true,
+  tlsAllowInvalidCertificates: true, // uniquement test, à retirer en production
+  tlsInsecure: true, // selon version du driver
 });
 
-let db;
-
-export async function connect() {
-  if (!db) {
-    try {
-      await client.connect();
-      db = client.db(process.env.MONGODB_DB_NAME);
-      console.log('✅ Connecté à MongoDB');
-    } catch (err) {
-      console.error('❌ Erreur de connexion MongoDB :', err);
-      throw err;
-    }
+async function connect() {
+  try {
+    await client.connect();
+    console.log('Connexion MongoDB réussie');
+  } catch (error) {
+    console.error('Erreur connexion MongoDB:', error);
   }
-  return db;
 }
+
+connect();

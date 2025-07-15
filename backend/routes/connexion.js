@@ -14,15 +14,15 @@ router.post('/', async (req, res) => {
   const { email, mot_de_passe } = req.body;
 
   try {
-    // Recherchez l'utilisateur par email
+    // Recherche l'utilisateur par email
     const utilisateur = await prisma.utilisateur.findUnique({
       where: { email },
     });
 
-    // Vérifiez si l'utilisateur existe et si le mot de passe est correct
+    // Vérifie si l'utilisateur existe et si le mot de passe est correct
     const match = await bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe);
     if (utilisateur && match) {
-      // Stockez des données de l'utilisateur dans la session
+      // Stock des données de l'utilisateur dans la session
       req.session.userId = utilisateur.id;
       req.session.role = utilisateur.role;
       req.session.nom = utilisateur.nom;
