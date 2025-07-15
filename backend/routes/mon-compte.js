@@ -21,7 +21,7 @@ router.get('/', isAuthenticated, async (req, res) => {
       }
     });
 
-    res.render('Pages/mon-compte', { commandes });
+    res.render('pages/mon-compte', { commandes });
   } catch (error) {
     console.error(error);
     res.status(500).send('Erreur serveur');

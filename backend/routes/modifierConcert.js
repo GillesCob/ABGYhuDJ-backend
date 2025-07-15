@@ -16,7 +16,7 @@ router.get('/modifier-concert/:id', isAuthenticated, isAdmin, async (req, res) =
 
     if (!concert) return res.status(404).send('Concert introuvable');
 
-    res.render('Pages/modifier-concert', { concert });
+    res.render('pages/modifier-concert', { concert });
   } catch (err) {
     console.error(err);
     res.status(500).send('Erreur serveur');
