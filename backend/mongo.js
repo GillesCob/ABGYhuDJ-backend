@@ -8,7 +8,7 @@ const client = new MongoClient(uri, {
   tlsInsecure: true, // selon version du driver
 });
 
-async function connect() {
+export async function connect() {
   try {
     await client.connect();
     console.log('Connexion MongoDB réussie');
@@ -16,5 +16,3 @@ async function connect() {
     console.error('Erreur connexion MongoDB:', error);
   }
 }
-
-connect();
