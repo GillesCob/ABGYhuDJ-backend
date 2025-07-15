@@ -68,20 +68,20 @@ app.get('/', (req, res) => {
 });
 
 app.get('/photos', (req, res) => {
-  res.render('Pages/photos');
+  res.render('pages/photos');
 });
 
 app.get('/inscription', (req, res) => {
-  res.render('Pages/inscription');
+  res.render('pages/inscription');
 });
 
 app.get('/connexion', (req, res) => {
-  res.render('Pages/connexion');
+  res.render('pages/connexion');
 });
 
 // Route protégée par le middleware isAdmin
 app.get('/admin', isAdmin, (req, res) => {
-  res.render('Pages/admin');
+  res.render('pages/admin');
 });
 
 // --- Middleware pour parser les données envoyées via formulaires HTML ---
