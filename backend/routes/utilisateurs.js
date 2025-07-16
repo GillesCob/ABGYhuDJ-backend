@@ -24,39 +24,36 @@ const prisma = new PrismaClient();
 
 /* ----------------------- CREATE ----------------------- */
 // Route HTTP POST pour créer un nouvel utilisateur. Utilisation de la sanitation pour cette route. A ajouter aux autres
-router.post('/', 
-    [
+router.post('/', [
     body('nom').trim().notEmpty().withMessage('Le nom est requis'),
     body('email').isEmail().withMessage('Email invalide').normalizeEmail(),
     body('mot_de_passe').isLength({ min: 6 }).withMessage('Le mot de passe doit contenir au moins 6 caractères'),
-  ],
-  async (req, res) => {
-        const errors = validationResult(req);
+    body('role').optional().isIn(['admin', 'utilisateur']).withMessage('Rôle invalide'),
+], async (req, res) => {
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ erreurs: errors.array() });
+        return res.status(400).json({ erreurs: errors.array() });
     }
-  const { nom, email, mot_de_passe } = req.body;
 
-  const mot_de_passe_hash = await bcrypt.hash(mot_de_passe, 10);
+    const { nom, email, mot_de_passe, role } = req.body;
+    const mot_de_passe_hash = await bcrypt.hash(mot_de_passe, 10);
 
-  try {
-    // Utilisation de Prisma pour insérer un nouvel utilisateur en BDD
-    const nouvelUtilisateur = await prisma.utilisateur.create({
-      data: {
-        nom,                         
-        email,                       
-        mot_de_passe : mot_de_passe_hash, // Mot de passe haché pour la sécurité
-      },
-    });
+    try {
+        const nouvelUtilisateur = await prisma.utilisateur.create({
+            data: {
+                nom,
+                email,
+                mot_de_passe: mot_de_passe_hash,
+                role: role || 'utilisateur', // Utilise le rôle fourni ou 'utilisateur' par défaut
+            },
+        });
 
-    // Envoi de la réponse HTTP avec statut 201 (créé) et l'utilisateur ajouté
-    res.status(201).json(nouvelUtilisateur);
-
-  } catch (error) {
-    // Gestion des erreurs (ex : email déjà utilisé)
-    res.status(400).json({ erreur: error.message });
-  }
+        res.status(201).json(nouvelUtilisateur);
+    } catch (error) {
+        res.status(400).json({ erreur: error.message });
+    }
 });
+
 
 /* ----------------------- READ (tous) ----------------------- */
 // Route HTTP GET pour récupérer tous les utilisateurs

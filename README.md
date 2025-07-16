@@ -168,7 +168,7 @@ Lien vers le repo :
 
 ### 🗃️ Fichiers SQL de création de la base
 
-Le fichier SQL de création de la base relationnelle MySQL a été généré automatiquement par Prisma via la commande `npx prisma migrate dev`.
+Le fichier SQL de création de la base relationnelle PostgreSQL a été généré automatiquement par Prisma via la commande `npx prisma migrate dev`.
 
 ➡️ Vous pouvez le retrouver ici :
 [`prisma/migrations/20250712075133_init/migration.sql`](./prisma/migrations/20250712075133_init/migration.sql)
@@ -195,6 +195,8 @@ Chaque document de la collection `logs` a la structure suivante :
 }
 ```
 
+Cette fonctionnalité a temporairement été commentée dans les routes "connexion", "deconnexion" et "reservation" dû à un soucis pour le moment non identifié de connexion une fois l'app déployée sur Render
+
 ---
 
 ## 📄 Documentation technique complète
@@ -205,7 +207,7 @@ Le projet suit une architecture **MVC (Modèle - Vue - Contrôleur)**, adaptée 
 
 #### 🧩 Modèle (Model)
 
-* Géré via **Prisma** pour la base **relationnelle MySQL** (tables : utilisateurs, concerts, tickets, commandes, paiements).
+* Géré via **Prisma** pour la base **relationnelle PostgreSQL** (tables : utilisateurs, concerts, tickets, commandes, paiements).
 * Fichiers liés : `prisma/schema.prisma`, migrations dans `prisma/migrations`
 * La base **NoSQL MongoDB** est utilisée pour stocker les **logs (connexions, déconnexions, achats)**.
 * Connexion dans `mongo.js`
@@ -247,6 +249,11 @@ Le projet suit une architecture **MVC (Modèle - Vue - Contrôleur)**, adaptée 
 ![Diagramme de classes](./frontend/images/ABGYhuDJ_Diagramme_de_classe.png)
 
 ---
+
+### 🚀 Déploiement
+Utilisation de Render afin de déployer ce service. 
+Disponible à l'adresse suivante : https://abgyhudj-backend.onrender.com/
+
 
 ## 👨‍🎓 Auteur
 
